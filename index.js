@@ -82,6 +82,15 @@ module.exports = () => {
         },
         formatRequest(msg, method) {
             return api.format(msg, method, 'request');
+        },
+        export(format = 'request', pattern = /./) {
+            const test = pattern instanceof RegExp ? key => pattern.test(key) : key => key.includes(pattern);
+            return Object
+                .entries({...handlers[format]})
+                .reduce((all, [key, fn]) => {
+                    if (test(key)) all[key] = handlers[format][key];
+                    return all;
+                }, {});
         }
     };
 

@@ -24,10 +24,10 @@ module.exports = () => {
                         doc = await new Promise((resolve, reject) => {
                             http.get(location, res => {
                                 let data = '';
-                                res.on('data', chunk => { data += chunk });
+                                res.on('data', chunk => { data += chunk; });
                                 res.on('end', () => {
                                     try {
-                                        resolve(JSON.parse(data))
+                                        resolve(JSON.parse(data));
                                     } catch (e) {
                                         reject(e);
                                     }

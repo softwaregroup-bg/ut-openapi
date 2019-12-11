@@ -1,45 +1,45 @@
 {
-    "name": "ut-openapi",
-    "version": "0.1.0",
-    "description": "Open api utilities",
-    "main": "index.js",
-    "scripts": {
-      "lint": "ut-lint .",
-      "release": "ut-release",
-      "changelog": "ut-changelog",
-      "check": "ut-check",
-      "cover": "ut-cover",
-      "precover": "ut-precover",
-      "lint-js": "ut-lint-js .",
-      "postpublish": "ut-postpublish",
-      "preversion": "ut-preversion",
-      "version": "ut-version",
-      "postversion": "ut-postversion",
-      "precommit": "ut-precommit",
-      "prepublish": "ut-prepublish",
-      "prepush": "ut-prepush",
-      "pretest": "ut-pretest",
-      "test": "ut-test",
-      "jenkins": "ut-jenkins",
-      "gitlab": "ut-gitlab"
-    },
-    "dependencies": {
-      "ut-function.interpolate": "^1.1.0"
-    },
-    "devDependencies": {
-      "tap": "^12.0.1",
-      "ut-tools": "^6.29.3"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git@github.com:softwaregroup-bg/ut-openapi.git"
-    },
-    "keywords": [
-        "openapi",
-        "openapi utilities",
-        "swagger",
-        "swagger utilities"
-    ],
-    "author": "Software Group",
-    "license": "Apache-2.0"
-  }
+  "name": "ut-openapi",
+  "version": "0.1.0",
+  "description": "Open api utilities",
+  "main": "index.js",
+  "scripts": {
+    "lint": "ut-lint .",
+    "release": "ut-release",
+    "changelog": "ut-changelog",
+    "check": "ut-check",
+    "cover": "ut-cover",
+    "precover": "ut-precover",
+    "lint-js": "ut-lint-js .",
+    "postpublish": "ut-postpublish",
+    "preversion": "ut-preversion",
+    "version": "ut-version",
+    "postversion": "ut-postversion",
+    "precommit": "ut-precommit",
+    "prepublish": "ut-prepublish",
+    "prepush": "ut-prepush",
+    "pretest": "ut-pretest",
+    "test": "ut-test",
+    "jenkins": "ut-jenkins",
+    "gitlab": "ut-gitlab"
+  },
+  "dependencies": {
+    "ut-function.interpolate": "^1.1.0"
+  },
+  "devDependencies": {
+    "tap": "^12.6.2",
+    "ut-tools": "^6.29.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:softwaregroup-bg/ut-openapi.git"
+  },
+  "keywords": [
+    "openapi",
+    "openapi utilities",
+    "swagger",
+    "swagger utilities"
+  ],
+  "author": "Software Group",
+  "license": "Apache-2.0"
+}

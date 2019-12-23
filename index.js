@@ -14,7 +14,7 @@ module.exports = () => {
 
     const api = {
         async load(namespace, document) {
-            const docs = typeof namespace === 'object' ? Object.entries(namespace) : [namespace, document];
+            const docs = typeof namespace === 'object' ? Object.entries(namespace) : [[namespace, document]];
             for (let i = 0, n = docs.length; i < n; i += 1) {
                 const [ns, location] = docs[i];
                 let doc;

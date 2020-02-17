@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "tap": "^12.6.2",
-    "ut-tools": "^6.29.11"
+    "ut-tools": "^6.33.2"
   },
   "repository": {
     "type": "git",

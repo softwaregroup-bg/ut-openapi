@@ -1,16 +1,17 @@
+const swaggerParser = require('swagger-parser');
 const http = require('http');
 const httpVerbs = ['post', 'put', 'patch', 'get', 'delete', 'options', 'head', 'trace'];
-const formatters = {
-    request: require('./format/request')
+const swagger = {
+    request: require('./format/swaggerRequest')
+};
+const openapi = {
+    request: require('./format/openapiRequest')
 };
 
 module.exports = () => {
-    const handlers = Object
-        .keys(formatters)
-        .reduce((all, formatter) => {
-            all[formatter] = {};
-            return all;
-        }, {});
+    const handlers = {
+        request: {}
+    };
 
     const api = {
         async load(namespace, document) {
@@ -25,7 +26,7 @@ module.exports = () => {
                             http.get(location, res => {
                                 let data = '';
                                 res.on('data', chunk => { data += chunk; });
-                                res.on('end', () => {
+                                res.on('end', async() => {
                                     try {
                                         resolve(JSON.parse(data));
                                     } catch (e) {
@@ -37,6 +38,7 @@ module.exports = () => {
                     } else doc = require(location);
                 }
                 // TBD: doc validation
+                doc = await swaggerParser.dereference(doc);
                 Object
                     .entries(doc.paths)
                     .forEach(([path, methods]) => {
@@ -44,11 +46,6 @@ module.exports = () => {
                             .entries(methods)
                             .filter(([method]) => httpVerbs.includes(method))
                             .forEach(([method, def]) => {
-                                const {operationId, parameters} = def;
-                                const schemas = []
-                                    .concat(methods.parameters)
-                                    .concat(parameters)
-                                    .filter(Boolean);
                                 let url = '';
                                 if (doc.openapi) { // e.g. openapi: '3.0.0'
                                     if (Array.isArray(doc.servers)) {
@@ -57,22 +54,34 @@ module.exports = () => {
                                             if (def.servers.startsWith('/')) url += doc.servers[0] + def.servers[0];
                                             else url += def.servers[0];
                                         } else {
-                                            url += doc.servers[0];
+                                            url += doc.servers[0].url;
                                         }
                                     } else if (Array.isArray(def.servers)) {
                                         url += def.servers[0];
                                     }
+                                    url += path;
+                                    Object
+                                        .entries(openapi)
+                                        .forEach(([format, formatter]) => {
+                                            handlers[format][ns + '.' + def.operationId] = formatter({
+                                                url,
+                                                method,
+                                                schemas: def
+                                            });
+                                        });
                                 } else if (doc.swagger) { // swagger: '2.0'
                                     url += Array.isArray(doc.schemes) ? doc.schemes[0] : 'http';
-                                    url += '://' + doc.host + doc.basePath;
+                                    url += '://' + doc.host + doc.basePath + path;
+                                    Object
+                                        .entries(swagger)
+                                        .forEach(([format, formatter]) => {
+                                            handlers[format][ns + '.' + def.operationId] = formatter({
+                                                url,
+                                                method,
+                                                schemas: [methods.parameters, def.parameters].filter(Boolean)
+                                            });
+                                        });
                                 }
-                                url += path;
-                                // TBD: url validation
-                                Object
-                                    .entries(formatters)
-                                    .forEach(([format, formatter]) => {
-                                        handlers[format][ns + '.' + operationId] = formatter({url, method, schemas});
-                                    });
                             });
                     });
             }

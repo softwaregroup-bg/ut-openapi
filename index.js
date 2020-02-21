@@ -64,7 +64,7 @@ module.exports = () => {
                                     case 'openapi': {
                                         const defUrl = (def.servers && def.servers[0] && def.servers[0].url) || '';
                                         const docUrl = (doc.servers && doc.servers[0] && doc.servers[0].url) || '';
-                                        formatProps.url += defUrl.startsWith('/') ? (docUrl + defUrl) : (defUrl || docUrl);
+                                        formatProps.url = (defUrl.startsWith('/') ? (docUrl + defUrl) : (defUrl || docUrl)) + path;
                                         formatProps.requestBody = def.requestBody;
                                         break;
                                     }

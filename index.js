@@ -53,7 +53,7 @@ module.exports = () => {
                                 const formatProps = {
                                     method,
                                     url: '',
-                                    schemas: [methods.parameters, def.parameters].filter(Boolean)
+                                    schemas: [].concat(methods.parameters).concat(def.parameters).filter(Boolean)
                                 };
                                 switch (docType) {
                                     case 'swagger': {

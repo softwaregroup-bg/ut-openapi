@@ -1,7 +1,11 @@
+const swaggerParser = require('swagger-parser');
 const http = require('http');
 const httpVerbs = ['post', 'put', 'patch', 'get', 'delete', 'options', 'head', 'trace'];
 const formatters = {
-    request: require('./format/request')
+    request: {
+        swagger: require('./format/request/swagger'),
+        openapi: require('./format/request/openapi')
+    }
 };
 
 module.exports = () => {
@@ -36,7 +40,9 @@ module.exports = () => {
                         });
                     } else doc = require(location);
                 }
-                // TBD: doc validation
+                doc = await swaggerParser.dereference(doc);
+                await swaggerParser.validate(doc);
+                const docType = doc.swagger ? 'swagger' : 'openapi';
                 Object
                     .entries(doc.paths)
                     .forEach(([path, methods]) => {
@@ -44,34 +50,33 @@ module.exports = () => {
                             .entries(methods)
                             .filter(([method]) => httpVerbs.includes(method))
                             .forEach(([method, def]) => {
-                                const {operationId, parameters} = def;
-                                const schemas = []
-                                    .concat(methods.parameters)
-                                    .concat(parameters)
-                                    .filter(Boolean);
-                                let url = '';
-                                if (doc.openapi) { // e.g. openapi: '3.0.0'
-                                    if (Array.isArray(doc.servers)) {
-                                        // TBD: server templates
-                                        if (Array.isArray(def.servers)) {
-                                            if (def.servers.startsWith('/')) url += doc.servers[0] + def.servers[0];
-                                            else url += def.servers[0];
-                                        } else {
-                                            url += doc.servers[0];
-                                        }
-                                    } else if (Array.isArray(def.servers)) {
-                                        url += def.servers[0];
+                                const formatProps = {
+                                    method,
+                                    url: '',
+                                    schemas: [].concat(methods.parameters).concat(def.parameters).filter(Boolean)
+                                };
+                                switch (docType) {
+                                    case 'swagger': {
+                                        formatProps.url += (doc.schemes && doc.schemes[0]) || 'http';
+                                        formatProps.url += '://' + doc.host + doc.basePath + path;
+                                        break;
                                     }
-                                } else if (doc.swagger) { // swagger: '2.0'
-                                    url += Array.isArray(doc.schemes) ? doc.schemes[0] : 'http';
-                                    url += '://' + doc.host + doc.basePath;
+                                    case 'openapi': {
+                                        const defUrl = (def.servers && def.servers[0] && def.servers[0].url) || '';
+                                        const docUrl = (doc.servers && doc.servers[0] && doc.servers[0].url) || '';
+                                        formatProps.url = (defUrl.startsWith('/') ? (docUrl + defUrl) : (defUrl || docUrl)) + path;
+                                        formatProps.requestBody = def.requestBody;
+                                        break;
+                                    }
+                                    default:
+                                        break;
                                 }
-                                url += path;
-                                // TBD: url validation
+
+                                // TODO: url format validation
                                 Object
                                     .entries(formatters)
                                     .forEach(([format, formatter]) => {
-                                        handlers[format][ns + '.' + operationId] = formatter({url, method, schemas});
+                                        handlers[format][ns + '.' + def.operationId] = formatter[docType](formatProps);
                                     });
                             });
                     });

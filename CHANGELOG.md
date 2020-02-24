@@ -1,3 +1,12 @@
+# [1.1.0](https://github.com/softwaregroup-bg/ut-openapi/compare/v1.0.3...v1.1.0) (2020-02-24)
+
+
+### Features
+
+* add openapi3 support ([#4](https://github.com/softwaregroup-bg/ut-openapi/issues/4)) ([3f64efd](https://github.com/softwaregroup-bg/ut-openapi/commit/3f64efd36a09d488a47f2b2b0172dce3cc22d89e))
+
+
+
 ## [1.0.3](https://github.com/softwaregroup-bg/ut-openapi/compare/v1.0.2...v1.0.3) (2020-02-17)
 
 

@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/softwaregroup-bg/ut-openapi/compare/v1.1.0...v1.2.0) (2020-06-02)
+
+
+### Features
+
+* upgrade swagger parser ([37545ce](https://github.com/softwaregroup-bg/ut-openapi/commit/37545ce1fcc270d6f2fc901b812a97091d012074))
+
+
+
 # [1.1.0](https://github.com/softwaregroup-bg/ut-openapi/compare/v1.0.3...v1.1.0) (2020-02-24)
 
 

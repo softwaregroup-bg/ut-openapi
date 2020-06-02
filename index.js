@@ -1,4 +1,4 @@
-const swaggerParser = require('swagger-parser');
+const swaggerParser = require('@apidevtools/swagger-parser');
 const http = require('http');
 const httpVerbs = ['post', 'put', 'patch', 'get', 'delete', 'options', 'head', 'trace'];
 const formatters = {
@@ -40,7 +40,7 @@ module.exports = () => {
                         });
                     } else doc = require(location);
                 }
-                doc = await swaggerParser.dereference(doc);
+                doc = await swaggerParser.bundle(doc);
                 await swaggerParser.validate(doc);
                 const docType = doc.swagger ? 'swagger' : 'openapi';
                 Object

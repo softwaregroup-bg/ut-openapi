@@ -38,7 +38,7 @@ module.exports = () => {
                                 });
                             }).on('error', reject);
                         });
-                    } else doc = require(location);
+                    } else doc = require('./serverRequire')(location);
                 }
                 doc = await swaggerParser.bundle(doc);
                 await swaggerParser.validate(doc);

@@ -27,6 +27,9 @@
     "@apidevtools/swagger-parser": "9.0.1",
     "ut-function.interpolate": "^1.1.1"
   },
+  "browser": {
+    "./serverRequire": false
+  },
   "devDependencies": {
     "tap": "^14.10.7",
     "ut-tools": "^6.33.2"

@@ -1,3 +1,12 @@
+## [1.2.1](https://github.com/softwaregroup-bg/ut-openapi/compare/v1.2.0...v1.2.1) (2020-07-13)
+
+
+### Bug Fixes
+
+* webpack ([d7c2609](https://github.com/softwaregroup-bg/ut-openapi/commit/d7c2609f2cae30ac130b1355de8038a98e5a7388))
+
+
+
 # [1.2.0](https://github.com/softwaregroup-bg/ut-openapi/compare/v1.1.0...v1.2.0) (2020-06-02)
 
 

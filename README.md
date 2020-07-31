@@ -224,7 +224,7 @@ E.g.
 ## Configuration
 
 Any property of an API can be overwritten from config file.  
-Recommendation is to use `.js` config files.  
+Recommendation is to use `.js` config files  
 
 E.g.  
 

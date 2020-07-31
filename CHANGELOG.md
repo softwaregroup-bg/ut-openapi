@@ -1,3 +1,12 @@
+# [1.3.0](https://github.com/softwaregroup-bg/ut-openapi/compare/v1.2.1...v1.3.0) (2020-07-31)
+
+
+### Features
+
+* allow load of apis from multiple locations ([8caa3a6](https://github.com/softwaregroup-bg/ut-openapi/commit/8caa3a619b297344d9a8ef9837f8965676fe798e))
+
+
+
 ## [1.2.1](https://github.com/softwaregroup-bg/ut-openapi/compare/v1.2.0...v1.2.1) (2020-07-13)
 
 

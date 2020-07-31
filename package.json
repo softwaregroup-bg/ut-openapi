@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "9.0.1",
-    "ut-function.interpolate": "^1.1.1"
+    "ut-function.interpolate": "^1.1.1",
+    "ut-function.merge": "^1.5.5"
   },
   "browser": {
     "./serverRequire": false

@@ -60,8 +60,13 @@ module.exports = () => {
                                 };
                                 switch (docType) {
                                     case 'swagger': {
-                                        formatProps.url += (doc.schemes && doc.schemes[0]) || 'http';
-                                        formatProps.url += '://' + doc.host + doc.basePath + path;
+                                        formatProps.url += [
+                                            (doc.schemes && doc.schemes[0]) || 'http',
+                                            '://',
+                                            doc.host,
+                                            doc.basePath,
+                                            path
+                                        ].filter(Boolean).join('');
                                         break;
                                     }
                                     case 'openapi': {

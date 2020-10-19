@@ -1,3 +1,12 @@
+## [1.3.1](https://github.com/softwaregroup-bg/ut-openapi/compare/v1.3.0...v1.3.1) (2020-10-19)
+
+
+### Bug Fixes
+
+* prevent undefined in url when no basepath ([#6](https://github.com/softwaregroup-bg/ut-openapi/issues/6)) ([731c64a](https://github.com/softwaregroup-bg/ut-openapi/commit/731c64ae17e5788329806a0ce40e993502980b8e))
+
+
+
 # [1.3.0](https://github.com/softwaregroup-bg/ut-openapi/compare/v1.2.1...v1.3.0) (2020-07-31)
 
 

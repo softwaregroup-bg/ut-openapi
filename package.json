@@ -1,6 +1,6 @@
 {
   "name": "ut-openapi",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Open api utilities",
   "main": "index.js",
   "scripts": {

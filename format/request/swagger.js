@@ -1,7 +1,7 @@
 const interpolate = require('ut-function.interpolate');
 module.exports = ({url, method, schemas}) => (msg = {}) => {
-    const {params = msg, body} = msg;
-    const requestObject = {url, method, body};
+    const {params = msg, body, baseUrl} = msg;
+    const requestObject = {url: baseUrl ? baseUrl + url : url, method, body};
     schemas.forEach(schema => {
         const param = typeof params[schema.name] === 'undefined' ? schema.default : params[schema.name];
         switch (schema.in) {

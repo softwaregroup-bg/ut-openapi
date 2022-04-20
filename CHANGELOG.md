@@ -1,3 +1,12 @@
+## [1.3.4](https://github.com/softwaregroup-bg/ut-openapi/compare/v1.3.3...v1.3.4) (2022-04-20)
+
+
+### Bug Fixes
+
+* baseUrl message property ([#7](https://github.com/softwaregroup-bg/ut-openapi/issues/7)) ([817e333](https://github.com/softwaregroup-bg/ut-openapi/commit/817e333e051b18373d81a607047a78e75ff518df))
+
+
+
 ## [1.3.3](https://github.com/softwaregroup-bg/ut-openapi/compare/v1.3.2...v1.3.3) (2021-10-21)
 
 

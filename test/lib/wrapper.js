@@ -7,7 +7,7 @@ module.exports = (ns, doc) => {
 
     tap.test(`test ${ns} methods`, assert => {
         const methods = utOpenAPi.export();
-        assert.true(Object.keys(methods).length > 0, `${ns} methods exported`);
+        assert.ok(Object.keys(methods).length > 0, `${ns} methods exported`);
         for (const method in params) {
             const methodName = `${ns}.${method}`;
             assert.matchSnapshot(methods[methodName](params[method]), methodName);
